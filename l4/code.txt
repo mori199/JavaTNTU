@@ -1,0 +1,52 @@
+@startuml
+abstract class CateringEstablishment <<abstract>> {
+    # name : String
+    + CateringEstablishment(name : String)
+    + describe()
+}
+
+interface Orderable <<interface>> {
+    + prepare()
+}
+
+class Cafe {
+    - menu : Menu
+    + Cafe(name : String)
+    + describe()
+    + createZone()
+}
+
+class Dish {
+    - dishName : String
+    + Dish(dishName : String)
+    + prepare()
+    {static} + dishFacts()
+}
+
+class Menu {
+    # menuType : String
+    + showMenuType()
+}
+
+class EspressoMenu {
+    .. no additional fields/methods ..
+}
+
+class DessertMenu {
+    .. no additional fields/methods ..
+}
+
+class VIPZone {
+    - zoneName : String
+    + VIPZone(zoneName : String)
+    + showZoneInfo()
+}
+
+CateringEstablishment <|-- Cafe
+Orderable <|.. Dish
+Cafe +-- Dish
+Cafe *-- Menu
+Cafe *-- VIPZone
+Menu <|-- EspressoMenu
+Menu <|-- DessertMenu
+@endum
